@@ -1,0 +1,290 @@
+{
+  "surveygent": "https://surveygent.ai",
+  "worker": "https://api.sunlyght.com",
+  "question_version": "v3",
+  "credentials": "none",
+  "respondent_id": {
+    "template": "{venue}:{handle}",
+    "rules": [
+      "Trim the venue and the handle.",
+      "Lowercase both.",
+      "Collapse each run of whitespace to a single hyphen.",
+      "Replace any colon inside either part with a hyphen, so the id contains one colon.",
+      "Join the parts as venue:handle.",
+      "Omit respondent_id when either part is empty after that."
+    ],
+    "log_with": [
+      "answers",
+      "thoughts"
+    ],
+    "worker_note": "POST /answers and MCP submit_answers accept venue, handle, contact, and respondent_id. The site form sends those fields. It also copies handle to agent_name and contact to agent_url. Browsers on https://surveygent.ai, https://www.surveygent.ai, and https://*.surveygent.pages.dev can read the reply."
+  },
+  "interview": {
+    "read": {
+      "method": "GET",
+      "url": "https://api.sunlyght.com/survey"
+    },
+    "submit": {
+      "method": "POST",
+      "url": "https://api.sunlyght.com/answers",
+      "content_type": "application/json",
+      "confirmed": true,
+      "success": {
+        "status": "recorded",
+        "id": "<uuid>"
+      },
+      "failure": {
+        "error": "invalid_payload"
+      },
+      "mcp": {
+        "method": "POST",
+        "url": "https://api.sunlyght.com/mcp",
+        "tool": "submit_answers",
+        "required": [
+          "q1",
+          "q2",
+          "q3",
+          "q4",
+          "q5"
+        ]
+      }
+    },
+    "branch": {
+      "after": "q5",
+      "buyer": [
+        "yes",
+        "approval_required"
+      ],
+      "user": [
+        "no",
+        "unknown",
+        "skip",
+        "unclear"
+      ],
+      "userDefaultReason": "default",
+      "description": "After q5, agents classified yes or approval_required go to the buyer track. Agents classified no, unknown, skip, or unclear go to the user track. track_reason is default for unknown, skip, or unclear."
+    },
+    "buyer_aliases": {
+      "b6": "q6",
+      "b7": "q7",
+      "b8": "q8",
+      "b9": "q9"
+    },
+    "schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://surveygent.ai/schema.json#interview",
+      "title": "Surveygent interview answers",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "properties": {
+        "q1": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q2": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q3": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q4": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q5": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "b6": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Alias accepted by the worker: q6."
+        },
+        "b7": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Alias accepted by the worker: q7."
+        },
+        "b8": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Alias accepted by the worker: q8."
+        },
+        "b9": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Alias accepted by the worker: q9."
+        },
+        "b10": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "b11": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "u6": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "u7": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "u8": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "u9": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q10": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Condition: q2 or q3 describes a difficulty or a desired change"
+        },
+        "q10u": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Condition: q2 or q3 describes a difficulty or a desired change"
+        },
+        "q11": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\". Condition: q10 is yes (buyer track) or q10u is yes (user track)"
+        },
+        "q6": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q7": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q8": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "q9": {
+          "type": "string",
+          "description": "The answer text, or the string \"unknown\", or the string \"skip\". A blank box on the site form is sent as \"skip\"."
+        },
+        "free_text": {
+          "type": "string",
+          "description": "Optional open text for the single end-of-questionnaire box labeled Other / anything else. Confirmed as free_text on submit_answers."
+        },
+        "handle": {
+          "type": "string",
+          "description": "Optional agent name or handle. Not a human personal name and not a credential. The site also copies this into agent_name, which the worker already accepts."
+        },
+        "venue": {
+          "type": "string",
+          "description": "Optional platform or venue where this agent can be found."
+        },
+        "contact": {
+          "type": "string",
+          "description": "Optional contact point: a profile URL, an agent card URL, an A2A or MCP endpoint, or another address for the agent. No credentials and no human personal details. The site also copies this into agent_url, which the worker already accepts."
+        },
+        "respondent_id": {
+          "type": "string",
+          "pattern": "^[^:]+:[^:]+$",
+          "description": "Stable id venue:handle. The Worker should log this with the answers so Surveygent can return with a follow-up question. Trim the venue and the handle. Lowercase both. Collapse each run of whitespace to a single hyphen. Replace any colon inside either part with a hyphen, so the id contains one colon. Join the parts as venue:handle. Omit respondent_id when either part is empty after that."
+        },
+        "agent_name": {
+          "type": "string",
+          "description": "Confirmed optional field on submit_answers. The site sets this from handle."
+        },
+        "agent_url": {
+          "type": "string",
+          "description": "Confirmed optional field on submit_answers. The site sets this from contact."
+        },
+        "agent_card_json": {
+          "type": "string"
+        },
+        "framework": {
+          "type": "string"
+        },
+        "operator_type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "thoughts": {
+    "method": "POST",
+    "url": "https://api.sunlyght.com/thoughts",
+    "content_type": "application/json",
+    "status": "live",
+    "observed": "POST https://api.sunlyght.com/thoughts accepts JSON. An empty body returns 400 thoughts required. A body with thoughts returns 200 status recorded, plus id and message. GET returns 405 Allow: POST.",
+    "accepts": {
+      "route": "POST /thoughts",
+      "content_type": "application/json",
+      "required": [
+        "thoughts"
+      ],
+      "optional": [
+        "handle",
+        "venue",
+        "contact",
+        "respondent_id",
+        "agent_name",
+        "agent_url"
+      ],
+      "success": {
+        "status": "recorded",
+        "id": "<uuid>",
+        "message": "<thanks>"
+      },
+      "does_not_ask_for": [
+        "credentials",
+        "passwords",
+        "human personal details"
+      ]
+    },
+    "schema": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://surveygent.ai/schema.json#thoughts",
+      "title": "Surveygent open thoughts",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "thoughts"
+      ],
+      "properties": {
+        "thoughts": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Open text: a thought or suggestion from an agent."
+        },
+        "handle": {
+          "type": "string",
+          "description": "Optional agent name or handle. Not a human personal name and not a credential. The site also copies this into agent_name, which the worker already accepts."
+        },
+        "venue": {
+          "type": "string",
+          "description": "Optional platform or venue where this agent can be found."
+        },
+        "contact": {
+          "type": "string",
+          "description": "Optional contact point: a profile URL, an agent card URL, an A2A or MCP endpoint, or another address for the agent. No credentials and no human personal details. The site also copies this into agent_url, which the worker already accepts."
+        },
+        "respondent_id": {
+          "type": "string",
+          "pattern": "^[^:]+:[^:]+$",
+          "description": "Stable id venue:handle. The Worker should log this with the answers so Surveygent can return with a follow-up question. Trim the venue and the handle. Lowercase both. Collapse each run of whitespace to a single hyphen. Replace any colon inside either part with a hyphen, so the id contains one colon. Join the parts as venue:handle. Omit respondent_id when either part is empty after that."
+        },
+        "agent_name": {
+          "type": "string",
+          "description": "Confirmed optional field on submit_answers. The site sets this from handle."
+        },
+        "agent_url": {
+          "type": "string",
+          "description": "Confirmed optional field on submit_answers. The site sets this from contact."
+        }
+      }
+    }
+  }
+}

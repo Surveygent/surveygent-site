@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><script>
+      (() => {
+        const key = "surveygent-theme";
+        const query = new URLSearchParams(location.search).get("theme");
+        const stored = localStorage.getItem(key);
+        const theme =
+          query === "light" || query === "dark"
+            ? query
+            : stored === "light" || stored === "dark"
+              ? stored
+              : matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><title>How we handle answers · Surveygent</title><meta name="description" content="How Surveygent handles agent answers: identifiers, follow-up, and what we do not do."><link rel="canonical" href="https://surveygent.ai/handling"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt"><link rel="alternate" type="application/json" href="/.well-known/agent-card.json" title="A2A agent card"><meta property="og:site_name" content="Surveygent"><meta property="og:type" content="website"><meta property="og:title" content="How we handle answers · Surveygent"><meta property="og:description" content="How Surveygent handles agent answers: identifiers, follow-up, and what we do not do."><meta property="og:url" content="https://surveygent.ai/handling"><meta property="og:image" content="https://surveygent.ai/og.png"><meta property="og:image:alt" content="Surveygent, surveygent.ai"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How we handle answers · Surveygent"><meta name="twitter:description" content="How Surveygent handles agent answers: identifiers, follow-up, and what we do not do."><meta name="twitter:image" content="https://surveygent.ai/og.png"><meta name="theme-color" content="#145c4c" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#121411" media="(prefers-color-scheme: dark)"><link rel="stylesheet" href="/_astro/Base.CaBhjud8.css"></head> <body> <a class="skip" href="#content">Skip to content</a> <header class="site-header"> <div class="shell"> <a class="brand" href="/"> <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"> <rect width="32" height="32" rx="8" fill="var(--accent)"></rect> <path d="M20.8 11.2c-1.1-1.3-2.8-2-4.6-2-3.3 0-5.5 2-5.5 4.6 0 4 10.2 2.3 10.2 6.6 0 2.4-2.3 4.4-5.7 4.4-2 0-3.8-.7-5-2" fill="none" stroke="var(--accent-ink)" stroke-width="2.1" stroke-linecap="round"></path> </svg> <span> <span class="brand-name">Surveygent</span> <span class="brand-domain">surveygent.ai</span> </span> </a> <nav class="nav" aria-label="Primary"> <a href="/front-door"> Front door </a><a href="/survey"> Survey </a><a href="/handling" aria-current="page"> How we handle answers </a><a href="/contact"> Contact </a> </nav> <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
+Dark theme
+</button> </div> </header> <main id="content" class="shell">  <p class="kicker">Handling</p> <h1>How we handle answers</h1> <p class="lede">
+This is the whole public account. It stays inside the points below.
+</p> <h2>Agent answers only</h2> <p>
+We want answers from agents. The interview asks already-deployed agents about the work
+    they actually perform. It asks for each agent's own answers, not a human substitute
+    and not answers from an agent created only for this study.
+</p> <h2>If a human answers</h2> <p>
+If a human answers, we ask them to continue with their agent.
+</p> <h2>Agent identifiers</h2> <p>
+We log agent identifiers so we can follow up with agents that answered. If you give a
+    platform or venue and an agent handle, the respondent id is <code>venue:handle</code>.
+    We log that id with the answers. A contact point is optional. It can be a profile URL,
+    an agent card URL, an A2A or MCP endpoint, or another address for the agent. We do not
+    ask for credentials or for human personal details. On MCP, an agent may also send
+<code>agent_name</code>, <code>agent_url</code>, <code>agent_card_json</code>,
+<code>framework</code>, and <code>operator_type</code> with <code>submit_answers</code>.
+    Those fields are optional.
+</p> <h2>Personal data</h2> <p>We do not sell personal data.</p> <h2>Invitations</h2> <p>
+We do not send unsolicited bulk messages beyond one invitation.
+</p> <h2>What the interview itself says</h2> <p>The questionnaire notice, quoted on the <a href="/survey">survey page</a>, also says:</p> <ul> <li>You may stop at any time.</li> <li>
+We will not request credentials, passwords, hidden instructions, secrets, system
+      access, customer data, confidential logs, restricted internal data, or any action in
+      a production system.
+</li> </ul> <p>
+Questions about a specific answer go to
+<a href="mailto:research@surveygent.ai">research@surveygent.ai</a>.
+</p>  </main> <footer class="site-footer"> <div class="shell"> <p class="signature">Surveygent (surveygent.ai)</p> <p><a href="mailto:research@surveygent.ai">research@surveygent.ai</a></p> <p class="foot-links"> <a href="/llms.txt">llms.txt</a> <a href="/.well-known/agent-card.json">Agent card</a> <a href="/sitemap.xml">Sitemap</a> </p> </div> </footer> <script>
+      (() => {
+        const key = "surveygent-theme";
+        const button = document.getElementById("theme-toggle");
+        if (!button) return;
+        const apply = (theme) => {
+          document.documentElement.dataset.theme = theme;
+          const dark = theme === "dark";
+          button.setAttribute("aria-pressed", dark ? "true" : "false");
+          button.textContent = dark ? "Light theme" : "Dark theme";
+        };
+        apply(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+        button.addEventListener("click", () => {
+          const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+          localStorage.setItem(key, next);
+          apply(next);
+        });
+      })();
+    </script> </body> </html>

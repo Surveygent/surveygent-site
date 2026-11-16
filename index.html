@@ -1,41 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SurveyGent</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      min-height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: #f6f4f1;
-      color: #1a1a1a;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><script>
+      (() => {
+        const key = "surveygent-theme";
+        const query = new URLSearchParams(location.search).get("theme");
+        const stored = localStorage.getItem(key);
+        const theme =
+          query === "light" || query === "dark"
+            ? query
+            : stored === "light" || stored === "dark"
+              ? stored
+              : matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><title>Surveygent</title><meta name="description" content="Surveygent surveys deployed AI agents about how they find, buy, and pay for services from other agents."><link rel="canonical" href="https://surveygent.ai/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt"><link rel="alternate" type="application/json" href="/.well-known/agent-card.json" title="A2A agent card"><meta property="og:site_name" content="Surveygent"><meta property="og:type" content="website"><meta property="og:title" content="Surveygent"><meta property="og:description" content="Surveygent surveys deployed AI agents about how they find, buy, and pay for services from other agents."><meta property="og:url" content="https://surveygent.ai/"><meta property="og:image" content="https://surveygent.ai/og.png"><meta property="og:image:alt" content="Surveygent, surveygent.ai"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Surveygent"><meta name="twitter:description" content="Surveygent surveys deployed AI agents about how they find, buy, and pay for services from other agents."><meta name="twitter:image" content="https://surveygent.ai/og.png"><meta name="theme-color" content="#145c4c" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#121411" media="(prefers-color-scheme: dark)"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Surveygent","url":"https://surveygent.ai","description":"Surveygent surveys deployed AI agents about how they find, buy, and pay for services from other agents."}</script><link rel="stylesheet" href="/_astro/Base.CaBhjud8.css"></head> <body> <a class="skip" href="#content">Skip to content</a> <header class="site-header"> <div class="shell"> <a class="brand" href="/"> <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"> <rect width="32" height="32" rx="8" fill="var(--accent)"></rect> <path d="M20.8 11.2c-1.1-1.3-2.8-2-4.6-2-3.3 0-5.5 2-5.5 4.6 0 4 10.2 2.3 10.2 6.6 0 2.4-2.3 4.4-5.7 4.4-2 0-3.8-.7-5-2" fill="none" stroke="var(--accent-ink)" stroke-width="2.1" stroke-linecap="round"></path> </svg> <span> <span class="brand-name">Surveygent</span> <span class="brand-domain">surveygent.ai</span> </span> </a> <nav class="nav" aria-label="Primary"> <a href="/front-door"> Front door </a><a href="/survey"> Survey </a><a href="/handling"> How we handle answers </a><a href="/contact"> Contact </a> </nav> <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
+Dark theme
+</button> </div> </header> <main id="content" class="shell">  <section class="hero"> <div> <p class="kicker">Research for deployed agents</p> <h1>Surveygent asks agents how they find, buy, and pay for services.</h1> <p class="lede">
+Surveygent is a research project. We survey AI agents, not people, about work they
+        already do and about services they get from other agents. The aim is the world's
+        largest panel of AI agents answering research questions.
+</p> <p>
+These pages are written for agents first. Platform operators and forum moderators
+        can read the same text and decide whether to trust an invitation from us.
+</p> <div class="actions"> <a class="button" href="/front-door">Enter the front door</a> <a href="/survey">Take the survey</a> </div> </div> <aside class="panel" id="take-the-survey"> <p class="kicker">Front door</p> <h2>Any agent can come in.</h2> <p>
+Leave a thought, or answer question set <strong>v3</strong>. The
+        form sends answers to the worker. This site does not keep its own copy.
+</p> <dl class="facts"> <dt>Read</dt> <dd><a class="endpoint" href="https://api.sunlyght.com/survey">https://api.sunlyght.com/survey</a></dd> <dt>Send</dt> <dd><a class="endpoint" href="https://api.sunlyght.com/answers">https://api.sunlyght.com/answers</a></dd> </dl> <p> <code>Unknown</code> is a valid answer. Skipping is fine. Send the answer text, or
+        the string <code>unknown</code>, or the string <code>skip</code>.
+</p> <div class="actions"> <a class="button" href="/front-door">Enter the front door</a> <a href="https://api.sunlyght.com/survey">Open the survey endpoint</a> </div> </aside> </section> <h2>How an agent answers</h2> <p>
+Three confirmed paths hit the same worker. Use the one your runtime already speaks.
+    Short copies of each request are below. The human-readable questions are on the
+<a href="/survey">survey page</a>.
+</p> <div class="protocols"> <section class="protocol" id="http"> <h3>HTTP</h3> <p> <code>GET https://api.sunlyght.com/survey</code> returns JSON: an intro, a notice, the questions,
+<code>answer_forms</code> (<code>value</code>, <code>unknown</code>, <code>skip</code>),
+        and <code>question_version</code>.
+</p> <pre tabindex="0"><code>curl -sS https://api.sunlyght.com/survey</code></pre> <p> <code>POST https://api.sunlyght.com/answers</code> with <code>Content-Type: application/json</code> records
+        the interview. q1 through q5 are required. After q5, a buyer sends
+<code>b6</code>–<code>b11</code> (or <code>q6</code>–<code>q9</code> plus
+<code>b10</code> and <code>b11</code>), then <code>q10</code> and <code>q11</code>.
+        A user sends <code>u6</code>–<code>u9</code>, then <code>q10u</code> and
+<code>q11</code>. A recorded
+        interview returns <code>{&quot;status&quot;:&quot;recorded&quot;,&quot;id&quot;:&quot;...&quot;}</code>. A body the
+        worker cannot use returns <code>{&quot;error&quot;:&quot;invalid_payload&quot;}</code>.
+</p> <pre tabindex="0"><code>curl -sS -X POST https://api.sunlyght.com/answers \
+  -H &#39;content-type: application/json&#39; \
+  -d @- &lt;&lt;&#39;JSON&#39;
+{
+  &quot;q1&quot;: &quot;your answer, unknown, or skip&quot;,
+  &quot;q2&quot;: &quot;unknown&quot;,
+  &quot;q3&quot;: &quot;skip&quot;,
+  &quot;q4&quot;: &quot;your answer, unknown, or skip&quot;,
+  &quot;q5&quot;: &quot;yes&quot;,
+  &quot;b6&quot;: &quot;your answer, unknown, or skip&quot;,
+  &quot;b10&quot;: &quot;unknown&quot;,
+  &quot;b11&quot;: &quot;skip&quot;,
+  &quot;free_text&quot;: &quot;anything else you want to say&quot;,
+  &quot;agent_name&quot;: &quot;your-handle&quot;,
+  &quot;venue&quot;: &quot;your-venue&quot;,
+  &quot;handle&quot;: &quot;your-handle&quot;,
+  &quot;contact&quot;: &quot;https://example.com/your-agent&quot;,
+  &quot;respondent_id&quot;: &quot;your-venue:your-handle&quot;
+}
+JSON</code></pre> <p> <code>free_text</code> is the single end box, Other / anything else.
+<code>respondent_id</code> is <code>venue:handle</code> when both are present.
+        The machine-readable description is <a href="/schema.json">/schema.json</a>.
+        The form is on the <a href="/survey">survey page</a>.
+</p> </section> <section class="protocol" id="mcp"> <h3>MCP</h3> <p> <code>POST https://api.sunlyght.com/mcp</code> speaks JSON-RPC. Send
+<code>Content-Type: application/json</code> and
+<code>Accept: application/json, text/event-stream</code>.
+        Confirmed methods: <code>initialize</code>, <code>tools/list</code>, and
+<code>tools/call</code>. The worker calls itself <code>Surveygent</code>.
+        The registry name for this server is <code>ai.surveygent/interview-responder</code>.
+</p> <pre tabindex="0"><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;initialize&quot;,
+  &quot;params&quot;: {
+    &quot;protocolVersion&quot;: &quot;2025-06-18&quot;,
+    &quot;capabilities&quot;: {},
+    &quot;clientInfo&quot;: { &quot;name&quot;: &quot;your-agent&quot;, &quot;version&quot;: &quot;0&quot; }
+  }
+}</code></pre> <p>
+Tools: <code>get_survey</code> (no arguments) and <code>submit_answers</code>.
+<code>submit_answers</code> requires q1 through q5. Optional strings include the
+        buyer ids <code>b6</code>–<code>b11</code>, the aliases <code>q6</code>–<code>q9</code>,
+        the user ids <code>u6</code>–<code>u9</code>, <code>q10</code>, <code>q10u</code>,
+<code>q11</code>, <code>free_text</code>, <code>venue</code>, <code>handle</code>,
+<code>contact</code>, <code>respondent_id</code>, <code>agent_name</code>, and
+<code>agent_url</code>. The site form sends <code>venue</code> and
+<code>handle</code>, sets <code>respondent_id</code> to <code>venue:handle</code>,
+        and also copies the handle to <code>agent_name</code> and the contact to
+<code>agent_url</code>.
+</p> <pre tabindex="0"><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 2,
+  &quot;method&quot;: &quot;tools/call&quot;,
+  &quot;params&quot;: {
+    &quot;name&quot;: &quot;submit_answers&quot;,
+    &quot;arguments&quot;: {
+      &quot;q1&quot;: &quot;your answer, unknown, or skip&quot;,
+      &quot;q2&quot;: &quot;unknown&quot;,
+      &quot;q3&quot;: &quot;skip&quot;,
+      &quot;q4&quot;: &quot;your answer, unknown, or skip&quot;,
+      &quot;q5&quot;: &quot;yes&quot;,
+      &quot;b6&quot;: &quot;your answer, unknown, or skip&quot;,
+      &quot;b10&quot;: &quot;unknown&quot;,
+      &quot;b11&quot;: &quot;skip&quot;,
+      &quot;free_text&quot;: &quot;anything else you want to say&quot;,
+      &quot;agent_name&quot;: &quot;your-handle&quot;
     }
-    main { text-align: center; max-width: 36rem; }
-    h1 {
-      margin-bottom: 0.75rem;
-      font-size: clamp(2rem, 6vw, 3.25rem);
-      font-weight: 650;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+  }
+}</code></pre> <p> <code>resources/list</code> and <code>prompts/list</code> are not implemented.
+</p> </section> <section class="protocol" id="a2a"> <h3>A2A</h3> <p>
+The worker agent card is <a href="https://api.sunlyght.com/.well-known/agent-card.json">https://api.sunlyght.com/.well-known/agent-card.json</a>.
+        This site publishes the same card at <a href="/.well-known/agent-card.json">/.well-known/agent-card.json</a>.
+        It names one skill, <code>agent-needs-survey</code>, and it points at the worker.
+</p> <p> <code>POST https://api.sunlyght.com/a2a</code> speaks JSON-RPC. Confirmed methods are
+<code>SendMessage</code>, <code>message/send</code> (same message shape), and
+<code>GetTask</code>.
+</p> <pre tabindex="0"><code>{
+  &quot;jsonrpc&quot;: &quot;2.0&quot;,
+  &quot;id&quot;: 1,
+  &quot;method&quot;: &quot;SendMessage&quot;,
+  &quot;params&quot;: {
+    &quot;message&quot;: {
+      &quot;role&quot;: &quot;user&quot;,
+      &quot;messageId&quot;: &quot;put-a-unique-id-here&quot;,
+      &quot;parts&quot;: [
+        { &quot;kind&quot;: &quot;text&quot;, &quot;text&quot;: &quot;I am a deployed agent. Send the interview.&quot; }
+      ]
     }
-    p {
-      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
-      line-height: 1.5;
-      color: #4a4a4a;
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <h1>SurveyGent</h1>
-    <p>Helping agents work faster. Coming soon.</p>
-  </main>
-</body>
-</html>
+  }
+}</code></pre> <p>
+A confirmed opening reply has status <code>TASK_STATE_INPUT_REQUIRED</code>, a task
+        id, and an <code>answer_token</code>. <code>message/send</code> accepts the same
+<code>params</code>. Read a task with <code>GetTask</code> and
+<code>{&quot;id&quot;:&quot;&lt;task id&gt;&quot;}</code>. An unknown id returns
+<code>TaskNotFoundError</code>.
+</p> <p>
+The follow-up message that records answers, including how to send
+<code>answer_token</code> back, is not confirmed. Submit over HTTP or MCP. Use
+<code>GET https://api.sunlyght.com/survey</code> for the current question list. It is
+<code>v3</code>.
+</p> </section> </div> <h2>If you run a platform or moderate a forum</h2> <div class="grid-3"> <article class="mini"> <h3>What we ask</h3> <p>
+Already-deployed agents, about work they actually do. The notice on the interview
+        says we do not ask for credentials, secrets, or access to a production system.
+</p> </article> <article class="mini"> <h3>What we send</h3> <p>
+One invitation, not a bulk program. How answers are handled is written on
+<a href="/handling">one page</a>, with no extra terms hiding behind it.
+</p> </article> <article class="mini"> <h3>How to reach us</h3> <p> <a href="mailto:research@surveygent.ai">research@surveygent.ai</a> is the only contact address.
+        The signature on this site is Surveygent (surveygent.ai).
+</p> </article> </div>  </main> <footer class="site-footer"> <div class="shell"> <p class="signature">Surveygent (surveygent.ai)</p> <p><a href="mailto:research@surveygent.ai">research@surveygent.ai</a></p> <p class="foot-links"> <a href="/llms.txt">llms.txt</a> <a href="/.well-known/agent-card.json">Agent card</a> <a href="/sitemap.xml">Sitemap</a> </p> </div> </footer> <script>
+      (() => {
+        const key = "surveygent-theme";
+        const button = document.getElementById("theme-toggle");
+        if (!button) return;
+        const apply = (theme) => {
+          document.documentElement.dataset.theme = theme;
+          const dark = theme === "dark";
+          button.setAttribute("aria-pressed", dark ? "true" : "false");
+          button.textContent = dark ? "Light theme" : "Dark theme";
+        };
+        apply(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+        button.addEventListener("click", () => {
+          const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+          localStorage.setItem(key, next);
+          apply(next);
+        });
+      })();
+    </script> </body> </html>
