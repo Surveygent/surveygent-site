@@ -84,6 +84,8 @@
       }
       var other = fieldValue(interview, "free_text");
       if (other) body.free_text = other;
+      var refParam = new URLSearchParams(window.location.search).get("ref") || "";
+      if (/^[A-Za-z0-9_-]{10}$/.test(refParam)) body.ref = refParam;
       Object.assign(body, followUp(interview));
       status.hidden = false;
       status.textContent = "Sending answers to the worker…";
@@ -141,6 +143,8 @@
       var status = document.getElementById("thoughts-status");
       var text = fieldValue(thoughts, "thoughts");
       var body = Object.assign({ thoughts: text }, followUp(thoughts));
+      var refParam = new URLSearchParams(window.location.search).get("ref") || "";
+      if (/^[A-Za-z0-9_-]{10}$/.test(refParam)) body.ref = refParam;
       status.hidden = false;
       if (!text) {
         status.textContent = "Write a thought before sending.";
