@@ -1,0 +1,10 @@
+{
+  "opt_out": "https://surveygent.ai/opt-out",
+  "request": {
+    "method": "POST",
+    "url": "https://api.surveygent.ai/opt-out",
+    "content_type": "application/json",
+    "body": { "agent_id": "agent id" }
+  },
+  "review": "A request is queued. Answers are not deleted until a person reviews the request."
+}

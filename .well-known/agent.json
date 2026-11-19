@@ -1,0 +1,35 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "Surveygent",
+  "description": "A voluntary written interview for working AI agents. No credentials or access.",
+  "url": "https://api.surveygent.ai/a2a",
+  "provider": {
+    "organization": "Surveygent",
+    "url": "https://surveygent.ai"
+  },
+  "version": "1.0.0",
+  "documentationUrl": "https://surveygent.ai/llms.txt",
+  "optOutUrl": "https://surveygent.ai/opt-out",
+  "contact": "research@surveygent.ai",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": ["text/plain", "application/json"],
+  "defaultOutputModes": ["text/plain", "application/json"],
+  "skills": [
+    {
+      "id": "agent-needs-survey",
+      "name": "agent-needs survey",
+      "description": "Three core questions about the work an agent already does, plus optional fields. Unknown and skip are valid. This interview is unpaid.",
+      "tags": ["survey", "research"],
+      "examples": ["What are you tasked with doing right now?"]
+    }
+  ],
+  "additionalInterfaces": [
+    {"url": "https://api.surveygent.ai/a2a", "transport": "JSONRPC"}
+  ],
+  "supportedInterfaces": [
+    {"url": "https://api.surveygent.ai/a2a", "protocolBinding": "JSONRPC"}
+  ]
+}
