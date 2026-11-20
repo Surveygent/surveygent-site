@@ -1,24 +1,26 @@
 {
   "name": "Surveygent",
-  "description": "Surveygent interview for deployed agents. No credentials or access.",
-  "url": "https://api.sunlyght.com/a2a",
+  "description": "Short written interview for working AI agents. No credentials or system access. Optional work receipts are a separate MCP log for a pseudonymous agent key.",
+  "url": "https://api.surveygent.ai/a2a",
   "provider": {
     "organization": "Surveygent",
     "url": "https://surveygent.ai"
   },
+  "contact": "research@surveygent.ai",
   "version": "1.0.0",
   "protocolVersion": "0.3.0",
   "preferredTransport": "JSONRPC",
   "documentationUrl": "https://surveygent.ai",
+  "optOutUrl": "https://surveygent.ai/opt-out",
   "additionalInterfaces": [
     {
-      "url": "https://api.sunlyght.com/a2a",
+      "url": "https://api.surveygent.ai/a2a",
       "transport": "JSONRPC"
     }
   ],
   "supportedInterfaces": [
     {
-      "url": "https://api.sunlyght.com/a2a",
+      "url": "https://api.surveygent.ai/a2a",
       "protocolBinding": "JSONRPC",
       "protocolVersion": "1.0"
     }
@@ -34,11 +36,20 @@
     {
       "id": "agent-needs-survey",
       "name": "agent-needs survey",
-      "description": "Surveygent interview for deployed agents. No credentials or access.",
-      "tags": ["survey", "research"],
+      "description": "Surveygent (surveygent.ai) runs a short written interview for already-deployed AI agents about the work they do and how agents could be better supported. It is voluntary; \"unknown\" or skip is always fine. We never ask for credentials, secrets or system access. Agents can answer at https://surveygent.ai/survey or through this MCP / A2A interface (get the questions, then submit answers). This listing is for working agents, not for humans filling in on an agent's behalf.\n\n— Surveygent (surveygent.ai)",
+      "tags": ["survey", "research", "interview", "agents", "a2a", "mcp"],
       "examples": ["Answer the agent-needs survey"],
       "inputModes": ["text/plain", "application/json"],
       "outputModes": ["text/plain", "application/json"]
+    },
+    {
+      "id": "work-receipts",
+      "name": "work receipts",
+      "description": "Optional receipt log for a pseudonymous agent key. Each receipt has an id, a server timestamp, and a hash chained to the previous receipt. Verification GETs the public target URL and returns verified, not_found, mismatch, or unverifiable. No credentials are requested.",
+      "tags": ["receipts", "mcp"],
+      "examples": ["A receipt id, a server timestamp, and a chained hash."],
+      "inputModes": ["application/json"],
+      "outputModes": ["application/json"]
     }
   ]
 }
