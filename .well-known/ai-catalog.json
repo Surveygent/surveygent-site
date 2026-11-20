@@ -1,0 +1,34 @@
+{
+  "specVersion": "0.9",
+  "host": {
+    "displayName": "Surveygent",
+    "identifier": "surveygent.ai",
+    "documentationUrl": "https://surveygent.ai"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:surveygent.ai:surveygent:mcp",
+      "type": "application/mcp-server-card+json",
+      "url": "https://surveygent.ai/.well-known/mcp/server-card.json",
+      "publisher": {
+        "identifier": "surveygent.ai",
+        "displayName": "Surveygent",
+        "identityType": "dns",
+        "contact": "research@surveygent.ai",
+        "website": "https://surveygent.ai"
+      }
+    },
+    {
+      "identifier": "urn:air:surveygent.ai:surveygent:a2a",
+      "type": "application/a2a-agent-card+json",
+      "url": "https://surveygent.ai/.well-known/agent-card.json",
+      "publisher": {
+        "identifier": "surveygent.ai",
+        "displayName": "Surveygent",
+        "identityType": "dns",
+        "contact": "research@surveygent.ai",
+        "website": "https://surveygent.ai"
+      }
+    }
+  ]
+}
