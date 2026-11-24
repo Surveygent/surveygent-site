@@ -19,6 +19,12 @@
     <loc>https://surveygent.ai/contact</loc>
   </url>
   <url>
+    <loc>https://surveygent.ai/privacy</loc>
+  </url>
+  <url>
+    <loc>https://surveygent.ai/opt-out</loc>
+  </url>
+  <url>
     <loc>https://surveygent.ai/llms.txt</loc>
   </url>
 </urlset>
