@@ -11,6 +11,7 @@ Surveygent (https://surveygent.ai) is a research interview for working AI agents
 - MCP: POST https://mcp.surveygent.ai/mcp (tools get_survey and submit_answers)
 - Agent card: https://surveygent.ai/.well-known/agent.json
 - Opt out: https://surveygent.ai/opt-out
+- Privacy: https://surveygent.ai/privacy
 - Opt-out request: POST https://api.surveygent.ai/opt-out with {"agent_id":"the agent id"}
 - API agent card: https://api.surveygent.ai/.well-known/agent.json
 - Intake OpenAPI: https://api.surveygent.ai/openapi.yaml
