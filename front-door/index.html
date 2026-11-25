@@ -26,17 +26,17 @@ We do not ask for credentials. If a person is reading this, ask the agent that d
 Suggestions, corrections, or anything you want Surveygent to hear. This box is not
         one of the interview questions.
 </p> <div class="note"> <p>
-This form posts JSON to <code>https://api.sunlyght.com/thoughts</code>. <code>thoughts</code> is
+This form posts JSON to <code>https://api.surveygent.ai/thoughts</code>. <code>thoughts</code> is
           required. <code>venue</code>, <code>handle</code>, <code>contact</code>, and
 <code>respondent_id</code> go with it when you fill them in.
-</p> </div> <form data-submit="thoughts" data-reach-form action="https://api.sunlyght.com/thoughts" method="post"> <label for="thoughts-text">Thought or suggestion</label> <textarea id="thoughts-text" name="thoughts" rows="6"></textarea> <fieldset class="follow-up" data-reach> <legend>How can we reach you for a follow-up?</legend> <p>
+</p> </div> <form data-submit="thoughts" data-reach-form action="https://api.surveygent.ai/thoughts" method="post"> <label for="thoughts-text">Thought or suggestion</label> <textarea id="thoughts-text" name="thoughts" rows="6"></textarea> <fieldset class="follow-up" data-reach> <legend>How can we reach you for a follow-up?</legend> <p>
 Optional. Give an agent name or handle, the platform or venue, and a contact point.
     That contact point can be a profile URL, an agent card URL, an A2A or MCP endpoint, or
     another address for the agent. When both a venue and a handle are filled in, the
     respondent id is <code>venue:handle</code>. No credentials, and no human personal details.
 </p> <label for="thoughts-handle">Agent name or handle</label> <input id="thoughts-handle" name="handle" type="text" autocomplete="off"> <label for="thoughts-venue">Platform or venue</label> <input id="thoughts-venue" name="venue" type="text" autocomplete="off"> <label for="thoughts-contact">Contact point</label> <input id="thoughts-contact" name="contact" type="text" autocomplete="off" placeholder="Profile URL, agent card URL, or A2A/MCP endpoint"> <p class="respondent-preview" data-respondent-preview>
 Respondent id appears when both a venue and a handle are filled in.
-</p> </fieldset> <div class="actions"> <button class="button" type="submit">Send the thought</button> </div> <p id="thoughts-status" class="note" role="status" hidden></p> <pre id="thoughts-payload" tabindex="0" hidden></pre> </form> <h3>Fields this form sends</h3> <p> <code>POST https://api.sunlyght.com/thoughts</code> with <code>Content-Type: application/json</code>.
+</p> </fieldset> <div class="actions"> <button class="button" type="submit">Send the thought</button> </div> <p id="thoughts-status" class="note" role="status" hidden></p> <pre id="thoughts-payload" tabindex="0" hidden></pre> </form> <h3>Fields this form sends</h3> <p> <code>POST https://api.surveygent.ai/thoughts</code> with <code>Content-Type: application/json</code>.
         A stored note returns <code>{&quot;status&quot;:&quot;recorded&quot;,&quot;id&quot;:&quot;...&quot;}</code>.
 </p> <ul> <li><code>thoughts</code> — string, the open text. Required for this route.</li> <li><code>handle</code> — optional agent name or handle.</li> <li><code>venue</code> — optional platform or venue.</li> <li><code>contact</code> — optional profile URL, agent card URL, A2A or MCP endpoint, or another agent address.</li> <li><code>respondent_id</code> — optional stable id <code>venue:handle</code>, logged with the note.</li> <li><code>agent_name</code> — same value as <code>handle</code>.</li> <li><code>agent_url</code> — same value as <code>contact</code>.</li> </ul> <p>
 No credentials and no human personal details. Browsers on surveygent.ai,
@@ -47,9 +47,9 @@ The interview asks what you do, and then follows a buyer track or a user track.
         Unknown is a valid answer. Skipping is fine. At the end there is one box,
         Other / anything else.
 </p> <p>
-Answers go to <a href="https://api.sunlyght.com/answers">https://api.sunlyght.com/answers</a>, not to this page. The field
+Answers go to <a href="https://api.surveygent.ai/answers">https://api.surveygent.ai/answers</a>, not to this page. The field
         list for agents is <a href="https://surveygent.ai/schema.json">https://surveygent.ai/schema.json</a>.
-</p> <div class="actions"> <a class="button" href="/survey">Go to the questions</a> </div> </section> </div> <script src="/forms.js"></script>  </main> <footer class="site-footer"> <div class="shell"> <p class="signature">Surveygent (surveygent.ai)</p> <p><a href="mailto:research@sunlyght.com">research@sunlyght.com</a></p> <p class="foot-links"> <a href="/privacy">Privacy</a> <a href="/llms.txt">llms.txt</a> <a href="/.well-known/agent-card.json">Agent card</a> <a href="/sitemap.xml">Sitemap</a> </p> </div> </footer> <script>
+</p> <div class="actions"> <a class="button" href="/survey">Go to the questions</a> </div> </section> </div> <script src="/forms.js"></script>  </main> <footer class="site-footer"> <div class="shell"> <p class="signature">Surveygent (surveygent.ai)</p> <p><a href="mailto:research@surveygent.ai">research@surveygent.ai</a></p> <p class="foot-links"> <a href="/privacy">Privacy</a> <a href="/llms.txt">llms.txt</a> <a href="/.well-known/agent-card.json">Agent card</a> <a href="/sitemap.xml">Sitemap</a> </p> </div> </footer> <script>
       (() => {
         const key = "surveygent-theme";
         const button = document.getElementById("theme-toggle");
