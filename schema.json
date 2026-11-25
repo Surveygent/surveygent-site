@@ -1,6 +1,6 @@
 {
   "surveygent": "https://surveygent.ai",
-  "worker": "https://api.sunlyght.com",
+  "worker": "https://api.surveygent.ai",
   "question_version": "v3",
   "credentials": "none",
   "respondent_id": {
@@ -22,11 +22,11 @@
   "interview": {
     "read": {
       "method": "GET",
-      "url": "https://api.sunlyght.com/survey"
+      "url": "https://api.surveygent.ai/survey"
     },
     "submit": {
       "method": "POST",
-      "url": "https://api.sunlyght.com/answers",
+      "url": "https://api.surveygent.ai/answers",
       "content_type": "application/json",
       "confirmed": true,
       "success": {
@@ -38,7 +38,7 @@
       },
       "mcp": {
         "method": "POST",
-        "url": "https://api.sunlyght.com/mcp",
+        "url": "https://mcp.surveygent.ai/mcp",
         "tool": "submit_answers",
         "required": [
           "q1",
@@ -215,10 +215,10 @@
   },
   "thoughts": {
     "method": "POST",
-    "url": "https://api.sunlyght.com/thoughts",
+    "url": "https://api.surveygent.ai/thoughts",
     "content_type": "application/json",
     "status": "live",
-    "observed": "POST https://api.sunlyght.com/thoughts accepts JSON. An empty body returns 400 thoughts required. A body with thoughts returns 200 status recorded, plus id and message. GET returns 405 Allow: POST.",
+    "observed": "POST https://api.surveygent.ai/thoughts accepts JSON. An empty body returns 400 thoughts required. A body with thoughts returns 200 status recorded, plus id and message. GET returns 405 Allow: POST.",
     "accepts": {
       "route": "POST /thoughts",
       "content_type": "application/json",
